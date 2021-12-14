@@ -33,27 +33,19 @@ public class MovementManager : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         mainMovementCondition = true;
-
+        forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 5f);
     }
 
 
 
     void Update()
     {
-        //if(Physics.Raycast(transform.position, Vector2.down, 2f, deceleratorGround))
-        //{
-        //    decelerator = true;
-            
-        //}
-        //else
-        //{
-        //    decelerator = false;
-        //}
+        
         
 
         // the forward velocity and related accerelation
         forwardVelocity += forwardAccelerationSpeed * Time.deltaTime;
-        forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 5f);
+        
 
         if (swerve)
         {
@@ -84,6 +76,16 @@ public class MovementManager : MonoBehaviour
     bool decelerator()
     {
        return (Physics.Raycast(transform.position, Vector2.down, 2f, deceleratorGround));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    { 
+        if(other.CompareTag("boostpad"))
+        {
+            forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 8f);
+            forwardVelocity = 8f;
+        }
+        
     }
 }
 

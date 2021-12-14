@@ -14,8 +14,11 @@ public class CameraManager : MonoBehaviour
         {
             followingCam.Priority = 9;
             climbingCam.Priority = 10;
+            transform.rotation = Quaternion.Euler(new Vector3(-10,0,0));
         }
     }
+
+
 
 
 }
