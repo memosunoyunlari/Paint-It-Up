@@ -13,7 +13,7 @@ public class MovementManager : MonoBehaviour
     private CharacterController characterController;
 
     [SerializeField] [Range(0.1f, 1f)] float forwardAccelerationSpeed;
-    [SerializeField] [Range(0.1f, 0.2f)] float swerveAccelerationSpeed;
+    [SerializeField] [Range(0.1f, 0.3f)] float swerveAccelerationSpeed;
     private float forwardVelocity;
 
     [SerializeField] [Range(0.25f, 1.5f)] float decelatartionSpeed;
@@ -58,7 +58,7 @@ public class MovementManager : MonoBehaviour
         if (swerve)
         {
             swerveVelocity += swerveAccelerationSpeed;
-            swerveVelocity = Mathf.Clamp(swerveVelocity, 0.1f, 0.8f);
+            swerveVelocity = Mathf.Clamp(swerveVelocity, 0.1f, 1.6f);
         }
 
         if(decelerator())
