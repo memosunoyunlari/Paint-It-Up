@@ -10,9 +10,14 @@ public class ParkourRelatedSectionalManager : MonoBehaviour
 
     MovementManager moveManager;
 
+    
+    
+
     private void Awake()
     {
        moveManager = this.gameObject.GetComponent<MovementManager>();
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,6 +33,7 @@ public class ParkourRelatedSectionalManager : MonoBehaviour
         if(other.CompareTag("RotatorCamOn"))
         {
             followingCam.Priority = 10;
+            
             climbingCam.Priority = 9;
             //player rotation
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));

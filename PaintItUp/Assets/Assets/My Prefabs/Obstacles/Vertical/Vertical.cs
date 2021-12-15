@@ -22,4 +22,6 @@ public class Vertical : MonoBehaviour
     {
         transform.position = Vector3.Lerp(startPos, targetPos, Mathf.PingPong(Time.time * moveSpeed, 1));
     }
+
+
 }

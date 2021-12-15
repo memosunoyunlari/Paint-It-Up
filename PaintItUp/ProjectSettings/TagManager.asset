@@ -9,6 +9,7 @@ TagManager:
   - RotatorCamOn
   - RotatorRight
   - obstacle
+  - ObstacleTrigger
   layers:
   - Default
   - TransparentFX

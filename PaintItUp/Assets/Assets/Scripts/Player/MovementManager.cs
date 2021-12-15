@@ -13,7 +13,7 @@ public class MovementManager : MonoBehaviour
     // forward movement variables
     [SerializeField] [Range(0.1f, 1f)] float forwardAccelerationSpeed;
     [SerializeField] [Range(0.1f, 0.3f)] float swerveAccelerationSpeed;
-    private float forwardVelocity;
+    public float forwardVelocity;
     
     //swerve variables
     public float swerveVelocity;
@@ -27,8 +27,8 @@ public class MovementManager : MonoBehaviour
     [SerializeField] LayerMask deceleratorGround;
 
     //vertical movement variables
-    private float verticalVelocity;
-    private float gravity = -9.81f;
+    public float verticalVelocity;
+    public float gravity = -9.81f;
     
     //max speed setters
     public bool firstLimit;
@@ -41,7 +41,7 @@ public class MovementManager : MonoBehaviour
     float rightRotatorSpeed;
 
     // final vector
-    Vector3 velocityVectors;
+    public Vector3 velocityVectors;
 
     void Awake()
     {
@@ -62,7 +62,7 @@ public class MovementManager : MonoBehaviour
         // the forward velocity and related accerelation
         forwardVelocity += forwardAccelerationSpeed * Time.deltaTime;
 
-        if(firstLimit) forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 9f);
+        if(firstLimit) forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 7f);
         if (secondLimit)
         {
             forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 3f);
@@ -73,7 +73,7 @@ public class MovementManager : MonoBehaviour
         if (swerve)
         {
             swerveVelocity += swerveAccelerationSpeed;
-            swerveVelocity = Mathf.Clamp(swerveVelocity, 0.1f, 1.6f);
+            swerveVelocity = Mathf.Clamp(swerveVelocity, 0.1f, 2f);
         }
 
         if(rightRotatingPlatform())
@@ -136,7 +136,7 @@ public class MovementManager : MonoBehaviour
         if(other.CompareTag("boostpad"))
         {
             
-            forwardVelocity = 9f;
+            forwardVelocity = 7f;
         }
         
     }
