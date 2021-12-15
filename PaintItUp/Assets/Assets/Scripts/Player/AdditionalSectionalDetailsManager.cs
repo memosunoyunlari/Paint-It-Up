@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class PerspectiveManager : MonoBehaviour
+public class AdditionalSectionalDetailsManager : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera followingCam;
     [SerializeField] CinemachineVirtualCamera climbingCam;
+
+    MovementManager moveManager;
+
+    private void Awake()
+    {
+       moveManager = this.gameObject.GetComponent<MovementManager>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +31,10 @@ public class PerspectiveManager : MonoBehaviour
             climbingCam.Priority = 9;
             //player rotation
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+            //rotator part speed limit
+            moveManager.firstLimit = false;
+            moveManager.secondLimit = true;
         }
     }
 

@@ -5,35 +5,44 @@ using UnityEngine;
 
 public class MovementManager : MonoBehaviour
 {
-
-
+    private CharacterController characterController;
+    
+    //main condition
     public bool mainMovementCondition;
 
-
-    private CharacterController characterController;
-
+    // forward movement variables
     [SerializeField] [Range(0.1f, 1f)] float forwardAccelerationSpeed;
     [SerializeField] [Range(0.1f, 0.3f)] float swerveAccelerationSpeed;
     private float forwardVelocity;
-
-    [SerializeField] [Range(0.25f, 1.5f)] float decelatartionSpeed;
-    
-
     public float swerveVelocity;
     public float swerveInputValue;
     public bool swerve;
 
-    private float verticalVelocity;
-    private float gravity = -9.81f;
+    [SerializeField] LayerMask leftRotatorGround;
+    [SerializeField] LayerMask rightRotatorGround;
+
+    //backward movement variables
+    [SerializeField] [Range(0.25f, 1.5f)] float decelatartionSpeed;
     [SerializeField] LayerMask deceleratorGround;
 
+    //vertical movement variables
+    private float verticalVelocity;
+    private float gravity = -9.81f;
+    
+    //max speed setters
+    public bool firstLimit;
+    public bool secondLimit;
+    
+    // final vector
     Vector3 velocityVectors;
 
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
         mainMovementCondition = true;
-        forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 6f);
+        firstLimit = true;
+        secondLimit = false;
+        
     }
 
 
@@ -41,11 +50,18 @@ public class MovementManager : MonoBehaviour
     void Update()
     {
         
-        
+
 
         // the forward velocity and related accerelation
         forwardVelocity += forwardAccelerationSpeed * Time.deltaTime;
-        
+
+        if(firstLimit) forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 9f);
+        if (secondLimit)
+        {
+            forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 4f);
+            forwardVelocity = 4f;
+        }
+
 
         if (swerve)
         {
@@ -53,7 +69,21 @@ public class MovementManager : MonoBehaviour
             swerveVelocity = Mathf.Clamp(swerveVelocity, 0.1f, 1.6f);
         }
 
-        if(decelerator())
+        if(rightRotatingPlatform())
+        {
+            swerveVelocity += 0.2f * Time.deltaTime;
+            Debug.Log("right");
+        }
+
+        if (leftRotatingPlatform())
+        {
+            swerveVelocity -= 0.2f * Time.deltaTime;
+            Debug.Log("left");
+        }
+
+
+
+        if (decelerator())
         {
             forwardVelocity += -decelatartionSpeed * Time.deltaTime;
             
@@ -78,12 +108,22 @@ public class MovementManager : MonoBehaviour
        return (Physics.Raycast(transform.position, Vector2.down, 2f, deceleratorGround));
     }
 
+    bool leftRotatingPlatform()
+    {
+        return (Physics.Raycast(transform.position, Vector2.down, 1.5f, leftRotatorGround));
+    }
+
+    bool rightRotatingPlatform()
+    {
+        return (Physics.Raycast(transform.position, Vector2.down, 1.5f, rightRotatorGround));
+    }
+
     private void OnTriggerEnter(Collider other)
     { 
         if(other.CompareTag("boostpad"))
         {
-            forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 8f);
-            forwardVelocity = 8f;
+            
+            forwardVelocity = 9f;
         }
         
     }
