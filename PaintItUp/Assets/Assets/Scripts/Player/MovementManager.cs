@@ -14,12 +14,13 @@ public class MovementManager : MonoBehaviour
     [SerializeField] [Range(0.1f, 1f)] float forwardAccelerationSpeed;
     [SerializeField] [Range(0.1f, 0.3f)] float swerveAccelerationSpeed;
     private float forwardVelocity;
+    
+    //swerve variables
     public float swerveVelocity;
     public float swerveInputValue;
     public bool swerve;
 
-    [SerializeField] LayerMask leftRotatorGround;
-    [SerializeField] LayerMask rightRotatorGround;
+    
 
     //backward movement variables
     [SerializeField] [Range(0.25f, 1.5f)] float decelatartionSpeed;
@@ -32,7 +33,13 @@ public class MovementManager : MonoBehaviour
     //max speed setters
     public bool firstLimit;
     public bool secondLimit;
-    
+
+    //rotating platform variables
+    [SerializeField] LayerMask leftRotatorGround;
+    [SerializeField] LayerMask rightRotatorGround;
+    float leftRotatorSpeed;
+    float rightRotatorSpeed;
+
     // final vector
     Vector3 velocityVectors;
 
@@ -50,7 +57,7 @@ public class MovementManager : MonoBehaviour
     void Update()
     {
         
-
+        
 
         // the forward velocity and related accerelation
         forwardVelocity += forwardAccelerationSpeed * Time.deltaTime;
@@ -58,8 +65,8 @@ public class MovementManager : MonoBehaviour
         if(firstLimit) forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 9f);
         if (secondLimit)
         {
-            forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 4f);
-            forwardVelocity = 4f;
+            forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 3f);
+            forwardVelocity = 3f;
         }
 
 
@@ -71,14 +78,20 @@ public class MovementManager : MonoBehaviour
 
         if(rightRotatingPlatform())
         {
-            swerveVelocity += 0.2f * Time.deltaTime;
-            Debug.Log("right");
+            rightRotatorSpeed = 1.3f;
+        }
+        else
+        {
+            rightRotatorSpeed = 0;
         }
 
         if (leftRotatingPlatform())
         {
-            swerveVelocity -= 0.2f * Time.deltaTime;
-            Debug.Log("left");
+            leftRotatorSpeed = -1.3f;
+        }
+        else
+        {
+            leftRotatorSpeed = 0;
         }
 
 
@@ -95,9 +108,9 @@ public class MovementManager : MonoBehaviour
 
 
         // the sum part of the repeated movement process
-        velocityVectors = new Vector3(swerveInputValue * swerveVelocity * Time.deltaTime, verticalVelocity * Time.deltaTime, forwardVelocity * Time.deltaTime);
+        velocityVectors = new Vector3((swerveInputValue * swerveVelocity + (rightRotatorSpeed + leftRotatorSpeed)) * Time.deltaTime, verticalVelocity * Time.deltaTime, forwardVelocity * Time.deltaTime);
 
-        Debug.Log(forwardVelocity);
+        
 
         if (mainMovementCondition) characterController.Move(velocityVectors);
 
@@ -105,17 +118,17 @@ public class MovementManager : MonoBehaviour
 
     bool decelerator()
     {
-       return (Physics.Raycast(transform.position, Vector2.down, 2f, deceleratorGround));
+       return Physics.Raycast(transform.position, Vector2.down, 2f, deceleratorGround);
     }
 
     bool leftRotatingPlatform()
     {
-        return (Physics.Raycast(transform.position, Vector2.down, 1.5f, leftRotatorGround));
+        return Physics.Raycast(transform.position, Vector2.down, 5f, leftRotatorGround);
     }
 
     bool rightRotatingPlatform()
     {
-        return (Physics.Raycast(transform.position, Vector2.down, 1.5f, rightRotatorGround));
+        return Physics.Raycast(transform.position, Vector2.down, 5f, rightRotatorGround);
     }
 
     private void OnTriggerEnter(Collider other)
