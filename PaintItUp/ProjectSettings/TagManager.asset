@@ -8,6 +8,7 @@ TagManager:
   - boostpad
   - RotatorCamOn
   - RotatorRight
+  - obstacle
   layers:
   - Default
   - TransparentFX

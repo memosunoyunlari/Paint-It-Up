@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1153821484699439116}
   - component: {fileID: 4028405885019202758}
   - component: {fileID: 7604020102201276663}
+  - component: {fileID: 7715527932842137974}
   m_Layer: 10
   m_Name: LeftSmallRotatingPlatform
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3235618350545896723}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.77, y: 45.86, z: 150.81}
   m_LocalScale: {x: 5, y: 5, z: 15}
   m_Children: []
@@ -93,3 +94,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 15
+--- !u!64 &7715527932842137974
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3235618350545896723}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1643726260354785405, guid: c054d5706924df641b5b4d8213259777, type: 3}

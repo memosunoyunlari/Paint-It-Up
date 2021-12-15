@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class AdditionalSectionalDetailsManager : MonoBehaviour
+public class ParkourRelatedSectionalManager : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera followingCam;
     [SerializeField] CinemachineVirtualCamera climbingCam;
