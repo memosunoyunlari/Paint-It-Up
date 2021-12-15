@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ClimbingCamOn
   - boostpad
+  - RotatorCamOn
   layers:
   - Default
   - TransparentFX

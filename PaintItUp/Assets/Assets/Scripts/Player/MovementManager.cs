@@ -33,7 +33,7 @@ public class MovementManager : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         mainMovementCondition = true;
-        forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 5f);
+        forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 6f);
     }
 
 
