@@ -5,14 +5,13 @@ using Cinemachine;
 
 public class ParkourRelatedSectionalManager : MonoBehaviour
 {
+    [Header("Virtual Cameras")]
     [SerializeField] CinemachineVirtualCamera followingCam;
     [SerializeField] CinemachineVirtualCamera climbingCam;
     [SerializeField] CinemachineVirtualCamera paintingCam;
 
     MovementManager moveManager;
 
-    
-    
 
     private void Awake()
     {

@@ -11,36 +11,42 @@ public class MovementManager : MonoBehaviour
     public bool mainMovementCondition;
 
     // forward movement variables
+    [Header("Forward Movement Variables")]
     [SerializeField] [Range(0.1f, 1f)] float forwardAccelerationSpeed;
-    [SerializeField] [Range(0.1f, 0.3f)] float swerveAccelerationSpeed;
-    public float forwardVelocity;
     
+    public float forwardVelocity;
+
     //swerve variables
+    [Header("Swerve Variables")]
+    [SerializeField] [Range(0.1f, 0.3f)] float swerveAccelerationSpeed;
     public float swerveVelocity;
     public float swerveInputValue;
     public bool swerve;
 
-    
-
     //backward movement variables
+    [Header("Deceleration Variables")]
     [SerializeField] [Range(0.25f, 1.5f)] float decelatartionSpeed;
     [SerializeField] LayerMask deceleratorGround;
 
     //vertical movement variables
+    [Header("Vertical Velocity Variables")]
     public float verticalVelocity;
     public float gravity = -9.81f;
-    
+
     //max speed setters
+    [Header("Speed Limit Variables")]
     public bool firstLimit;
     public bool secondLimit;
 
     //rotating platform variables
+    [Header("Rotating Platform Related Movement Variables")]
     [SerializeField] LayerMask leftRotatorGround;
     [SerializeField] LayerMask rightRotatorGround;
     float leftRotatorSpeed;
     float rightRotatorSpeed;
 
     // final vector
+    [Header("Final Movement Vector")]
     public Vector3 velocityVectors;
 
     void Awake()
