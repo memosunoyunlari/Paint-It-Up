@@ -18,7 +18,13 @@ public class ObstacleRelatedCharacterManager : MonoBehaviour
 
     private bool first;
 
-    
+    private void Update()
+    {
+        if (transform.position.y < -20)
+        {
+            ResetPlayer();
+        }
+    }
 
 
     private void Start()

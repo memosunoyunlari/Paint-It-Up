@@ -26,6 +26,8 @@ public class PaintingSystem : MonoBehaviour
     [SerializeField] TextMeshProUGUI countdown;
     [SerializeField] TextMeshProUGUI paintAmountUI;
 
+    MovementManager moveManager;
+
 
 
     private void Awake()
@@ -35,6 +37,8 @@ public class PaintingSystem : MonoBehaviour
         painting = false;
         rb = paintCursor.GetComponent<Rigidbody>();
         paintAmount = 30;
+
+        moveManager = GetComponent<MovementManager>();
     }
 
     private void Update()
@@ -64,8 +68,13 @@ public class PaintingSystem : MonoBehaviour
         }
         if(paintAmount == 0 || paintCursor.transform.position.y > 53.64f)
         {
-            Time.timeScale = 0;
+            
+
+            paintCursor.SetActive(false);
+            
             lastPanel.SetActive(true);
+
+            moveManager.enabled = false;
         }
 
         if(moveCursor)
