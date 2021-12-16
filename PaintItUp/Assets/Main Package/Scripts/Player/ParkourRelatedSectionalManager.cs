@@ -7,6 +7,7 @@ public class ParkourRelatedSectionalManager : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera followingCam;
     [SerializeField] CinemachineVirtualCamera climbingCam;
+    [SerializeField] CinemachineVirtualCamera paintingCam;
 
     MovementManager moveManager;
 
@@ -42,6 +43,14 @@ public class ParkourRelatedSectionalManager : MonoBehaviour
             moveManager.firstLimit = false;
             moveManager.secondLimit = true;
         }
+
+        if (other.CompareTag("Finish-PaintingTrigger"))
+        {
+            paintingCam.Priority = 11;
+            moveManager.enabled = false;
+
+        }
+
     }
 
 
