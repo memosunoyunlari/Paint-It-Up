@@ -51,6 +51,7 @@ public class MovementManager : MonoBehaviour
 
     void Awake()
     {
+       
         characterController = GetComponent<CharacterController>();
         mainMovementCondition = true;
         firstLimit = true;

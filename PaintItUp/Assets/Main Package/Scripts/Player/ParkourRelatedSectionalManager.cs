@@ -11,12 +11,13 @@ public class ParkourRelatedSectionalManager : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera paintingCam;
 
     MovementManager moveManager;
+    PaintingSystem paintSystem;
 
 
     private void Awake()
     {
        moveManager = this.gameObject.GetComponent<MovementManager>();
-
+        paintSystem = gameObject.GetComponent<PaintingSystem>();
         
     }
 
@@ -47,12 +48,14 @@ public class ParkourRelatedSectionalManager : MonoBehaviour
         {
             paintingCam.Priority = 11;
             moveManager.enabled = false;
+            // activating paint subsystem
+            paintSystem.activation = true;
 
         }
 
     }
 
-
+    
 
 
 }
