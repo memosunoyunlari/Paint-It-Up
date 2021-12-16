@@ -4,28 +4,25 @@ using UnityEngine;
 using TMPro;
 public class PaintingSystem : MonoBehaviour
 {
-    [SerializeField] GameObject paintCursor;
+    [Header("Painting Variables")]
     [SerializeField] GameObject[] paintPrefabs;
-
     public float paintAmount = 30;
+    [Header("Paint Cursor Variables")]
+    [SerializeField] GameObject paintCursor;
     [SerializeField] float verticalSpeed;
     [SerializeField] float cursorAccelerationValue = 0.3f;
     [SerializeField] float horizontalSpeed;
+    Rigidbody rb;
 
+    [Header("Segment Bools")]
     public bool activation;
-
     private bool tips;
     private bool painting;
     private bool moveCursor;
 
-
-    //painting prefabs
-
-    Rigidbody rb;
-
+    [Header("UI Elements")]
     [SerializeField] GameObject paintPanelAndText;
     [SerializeField] GameObject lastPanel;
-
     [SerializeField] TextMeshProUGUI countdown;
     [SerializeField] TextMeshProUGUI paintAmountUI;
 
