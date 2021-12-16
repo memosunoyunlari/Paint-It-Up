@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class PaintingSystem : MonoBehaviour
 {
     [SerializeField] GameObject paintCursor;
     [SerializeField] GameObject[] paintPrefabs;
 
-    [SerializeField] float paintAmount = 15;
+    public float paintAmount = 30;
     [SerializeField] float verticalSpeed;
     [SerializeField] float cursorAccelerationValue = 0.3f;
     [SerializeField] float horizontalSpeed;
@@ -23,8 +23,12 @@ public class PaintingSystem : MonoBehaviour
 
     Rigidbody rb;
 
-    [SerializeField] GameObject panelAndText;
-    
+    [SerializeField] GameObject paintPanelAndText;
+    [SerializeField] GameObject lastPanel;
+
+    [SerializeField] TextMeshProUGUI countdown;
+    [SerializeField] TextMeshProUGUI paintAmountUI;
+
 
 
     private void Awake()
@@ -33,10 +37,13 @@ public class PaintingSystem : MonoBehaviour
         tips = false;
         painting = false;
         rb = paintCursor.GetComponent<Rigidbody>();
+        paintAmount = 30;
     }
 
     private void Update()
     {
+        paintAmountUI.text = paintAmount.ToString();   
+
         if(activation)
         {
             StartCoroutine("PaintTips");
@@ -54,9 +61,14 @@ public class PaintingSystem : MonoBehaviour
             var currentPrefabIndex = Random.Range(0, paintPrefabs.Length);
             Instantiate(paintPrefabs[currentPrefabIndex], paintCursor.transform.position, paintCursor.transform.rotation);
             paintAmount--;
-            Debug.Log(paintAmount);
+            
             
                 
+        }
+        if(paintAmount == 0 || paintCursor.transform.position.y > 53.64f)
+        {
+            Time.timeScale = 0;
+            lastPanel.SetActive(true);
         }
 
         if(moveCursor)
@@ -81,7 +93,7 @@ public class PaintingSystem : MonoBehaviour
     {
         activation = false;
         yield return new WaitForSeconds(1.5f);
-        panelAndText.SetActive(true);
+        paintPanelAndText.SetActive(true);
         tips = true;
     }
 
@@ -89,14 +101,16 @@ public class PaintingSystem : MonoBehaviour
     {
         tips = false;
 
-        panelAndText.SetActive(false);
+        paintPanelAndText.SetActive(false);
 
-        //3
+        countdown.enabled = true;
+        countdown.text = 3.ToString();
         yield return new WaitForSeconds(1);
-        //2
+        countdown.text = 2.ToString();
         yield return new WaitForSeconds(1);
-        //1
+        countdown.text = 1.ToString();
         yield return new WaitForSeconds(1);
+        countdown.enabled = false;
         
         paintCursor.SetActive(true);
 

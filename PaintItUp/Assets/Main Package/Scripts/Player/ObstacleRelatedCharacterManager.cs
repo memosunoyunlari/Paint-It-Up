@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class ObstacleRelatedCharacterManager : MonoBehaviour
 {
+    PaintingSystem paintSystem;
     MovementManager moveManager;
 
     private Vector3 startPos;
@@ -15,34 +16,67 @@ public class ObstacleRelatedCharacterManager : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera follow;
     [SerializeField] CinemachineVirtualCamera climb;
 
+    private bool first;
+
     
 
-    private void Awake()
+
+    private void Start()
     {
         startPos = transform.position;
         moveManager = GetComponent<MovementManager>();
+        paintSystem = GetComponent<PaintingSystem>();
 
         startRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+        first = true;
     }
 
+    
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.gameObject.CompareTag("obstacle"))
+        if (hit.gameObject.tag == ("obstacle") && first)
         {
-            transform.position = startPos;
-            moveManager.forwardVelocity = 0;
-            moveManager.swerveVelocity = 0;
-            moveManager.verticalVelocity = 0;
 
-            follow.Priority = 11;
-            climb.Priority = 9;
+            ResetPlayer();
+            StartCoroutine("firstTimer");
 
-            transform.rotation = startRotation;
         }
+        else
+        {
+
+            return;
+        }
+
+
+
     }
 
+    IEnumerator firstTimer()
+    {
+        first = false;
+        yield return new WaitForSeconds(0.7f);
+        first = true;
+    }
+    
 
+    
 
+    private void ResetPlayer()
+    {
+        transform.position = startPos;
+        moveManager.forwardVelocity = 0;
+        moveManager.swerveVelocity = 0;
+        moveManager.verticalVelocity = 0;
+        transform.position = startPos;
+        transform.position = startPos;
 
+        follow.Priority = 11;
+        climb.Priority = 9;
+
+        transform.rotation = startRotation;
+
+        paintSystem.paintAmount--;
+    }
 }

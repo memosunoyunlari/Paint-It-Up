@@ -117,7 +117,7 @@ public class MovementManager : MonoBehaviour
         // the sum part of the repeated movement process
         velocityVectors = new Vector3((swerveInputValue * swerveVelocity + (rightRotatorSpeed + leftRotatorSpeed)) * Time.deltaTime, verticalVelocity * Time.deltaTime, forwardVelocity * Time.deltaTime);
 
-        Debug.Log(forwardVelocity);
+        
 
         if (mainMovementCondition) characterController.Move(velocityVectors);
 

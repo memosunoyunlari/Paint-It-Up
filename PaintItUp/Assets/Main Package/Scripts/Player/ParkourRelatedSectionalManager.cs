@@ -16,7 +16,7 @@ public class ParkourRelatedSectionalManager : MonoBehaviour
 
     private void Awake()
     {
-       moveManager = this.gameObject.GetComponent<MovementManager>();
+        moveManager = this.gameObject.GetComponent<MovementManager>();
         paintSystem = gameObject.GetComponent<PaintingSystem>();
         
     }
