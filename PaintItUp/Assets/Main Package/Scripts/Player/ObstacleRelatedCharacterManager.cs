@@ -35,7 +35,7 @@ public class ObstacleRelatedCharacterManager : MonoBehaviour
             moveManager.swerveVelocity = 0;
             moveManager.verticalVelocity = 0;
 
-            follow.Priority = 10;
+            follow.Priority = 11;
             climb.Priority = 9;
 
             transform.rotation = startRotation;

@@ -62,7 +62,7 @@ public class MovementManager : MonoBehaviour
         // the forward velocity and related accerelation
         forwardVelocity += forwardAccelerationSpeed * Time.deltaTime;
 
-        if(firstLimit) forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 7f);
+        if(firstLimit) forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 8f);
         if (secondLimit)
         {
             forwardVelocity = Mathf.Clamp(forwardVelocity, 0.1f, 3f);
@@ -110,7 +110,7 @@ public class MovementManager : MonoBehaviour
         // the sum part of the repeated movement process
         velocityVectors = new Vector3((swerveInputValue * swerveVelocity + (rightRotatorSpeed + leftRotatorSpeed)) * Time.deltaTime, verticalVelocity * Time.deltaTime, forwardVelocity * Time.deltaTime);
 
-        
+        Debug.Log(forwardVelocity);
 
         if (mainMovementCondition) characterController.Move(velocityVectors);
 
@@ -131,12 +131,14 @@ public class MovementManager : MonoBehaviour
         return Physics.Raycast(transform.position, Vector2.down, 5f, rightRotatorGround);
     }
 
+
+    //boostpad trigger
     private void OnTriggerEnter(Collider other)
     { 
         if(other.CompareTag("boostpad"))
         {
             
-            forwardVelocity = 7f;
+            forwardVelocity = 8f;
         }
         
     }

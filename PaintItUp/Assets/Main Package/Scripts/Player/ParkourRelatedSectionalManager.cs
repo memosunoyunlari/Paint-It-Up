@@ -27,7 +27,7 @@ public class ParkourRelatedSectionalManager : MonoBehaviour
             followingCam.Priority = 9;
             climbingCam.Priority = 10;
             //player rotation
-            transform.rotation = Quaternion.Euler(new Vector3(-10,0,0));
+            transform.rotation = Quaternion.Euler(new Vector3(-40,0,0));
         }
 
         if(other.CompareTag("RotatorCamOn"))
