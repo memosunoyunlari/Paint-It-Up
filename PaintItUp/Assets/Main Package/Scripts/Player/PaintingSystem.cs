@@ -32,6 +32,7 @@ public class PaintingSystem : MonoBehaviour
 
     private void Awake()
     {
+        //setup
         paintCursor.SetActive(false);
         tips = false;
         painting = false;
@@ -43,6 +44,7 @@ public class PaintingSystem : MonoBehaviour
 
     private void Update()
     {
+        //updates paintAmount
         paintAmountUI.text = paintAmount.ToString();   
 
         if(activation)
@@ -77,6 +79,7 @@ public class PaintingSystem : MonoBehaviour
             moveManager.enabled = false;
         }
 
+        //gets triggerred by painting tips part
         if(moveCursor)
         {
             
@@ -94,6 +97,7 @@ public class PaintingSystem : MonoBehaviour
 
     }
 
+    //Interconnected IEnumerators
 
     IEnumerator PaintTips()
     {

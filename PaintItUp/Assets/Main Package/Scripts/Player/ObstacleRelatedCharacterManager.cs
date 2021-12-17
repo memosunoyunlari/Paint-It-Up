@@ -5,21 +5,27 @@ using Cinemachine;
 
 public class ObstacleRelatedCharacterManager : MonoBehaviour
 {
+    //changing the paint amount with collisions
     PaintingSystem paintSystem;
+    //resetting the velocity all around
     MovementManager moveManager;
-
+    //resetting the position of the character
     private Vector3 startPos;
 
     //startRotation for resetting
     Quaternion startRotation;
 
+    //resetting camera prios
+    [Header("Virtual Cameras")]
     [SerializeField] CinemachineVirtualCamera follow;
     [SerializeField] CinemachineVirtualCamera climb;
 
+    //stabilizing character controller's collision detection
     private bool first;
 
     private void Update()
     {
+        //if the player fall from the platform:
         if (transform.position.y < -20)
         {
             ResetPlayer();
@@ -59,6 +65,7 @@ public class ObstacleRelatedCharacterManager : MonoBehaviour
 
     }
 
+    //stabilization measure since OnControllerColliderHit fires multiple times per collision
     IEnumerator firstTimer()
     {
         first = false;
@@ -68,7 +75,7 @@ public class ObstacleRelatedCharacterManager : MonoBehaviour
     
 
     
-
+    //resetting all the related values
     private void ResetPlayer()
     {
         transform.position = startPos;
